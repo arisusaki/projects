@@ -1,6 +1,7 @@
+-- DDL for creating tables
 create database annandale_cupcakes;
 use annandale_cupcakes;
-
+--DDL for creating data
 create table customer (
     customer_id int primary key auto_increment,
     first_name varchar(50),
@@ -75,3 +76,15 @@ create table sale_item (
     created_at datetime,
     updated_at datetime
     );
+
+-- DML insert statements for test data
+
+-- Dumping data for table `customer`
+LOCK TABLES `customer` WRITE;
+INSERT INTO `customer` VALUES (1,'New','Customer','(111) 222-3333','new.customer@gmail.com','1233 Little River Tpk','Annandale','VA','22002-    ',NULL,NULL,NULL),(2,'Barb','Smith','(555) 234-5233','bsmith@aol.com','507 Main St, #401','Fairfax','Virginia','22003-    ',NULL,NULL,NULL),(3,'Ryan','Ammons','(555) 555-5555','rammons@nvcc.edu','123 Main St','Alexandria','VA','22310-    ','He\'s okay.',NULL,NULL),(4,'Chris','Smith','(202) 555-1234','c.smith@smithness.com','555 Round Rd','Washington','District of Columbia','20001-    ',NULL,NULL,NULL);
+UNLOCK TABLES;
+
+-- Dumping data for table `customer_note`
+LOCK TABLES `customer_note` WRITE;
+INSERT INTO `customer_note` VALUES (1,'Test','This is a test note :)',1,NULL,NULL),(2,'Hi, I like cupcakes','Yay!',2,NULL,NULL),(3,'Lobbyist','Works on K Street, wants to have cupcake catering to events',4,NULL,NULL);
+UNLOCK TABLES;
