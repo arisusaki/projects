@@ -1,0 +1,52 @@
+ https://www.w3schools.com/sql Links to an external site. along with its sample database "Northwind Traders" -- the one with Customers, Orders, Employees, Products, etc. 
+
+1. Show the order id, order date, customer name, and country for all orders. 
+SELECT OrderID, CustomerName, orderdate, country
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID; 
+
+2. Show the order id, order date, customer name, and country for orders with customers in Germany, Poland and Denmark. Sort by Order date from newest to oldest
+SELECT OrderID, CustomerName, orderdate, country
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID
+WHERE COUNTRY IN ('GERMANY', 'DENMARK', 'POLAND')
+ORDER BY ORDERDATE desc;
+
+3. Show the product id, product name, price and category name for all products. 
+SELECT productid, productname, price, categoryname
+FROM Products
+INNER JOIN categories on products.categoryid = categories.categoryid
+
+4. Show the product id, product name, price and category name for products with the category of Beverages, Produce, or Condiments. 
+SELECT PRODUCTID, PRODUCTNAME, PRICE, CATEGORYNAME
+FROM PRODUCTS
+INNER JOIN CATEGORIES ON PRODUCTS.CATEGORYID = CATEGORIES.CATEGORYID
+WHERE CATEGORYNAME IN ("BEVERAGES", "CONDIMENTS", "PRODUCE");
+
+5.Show the product id, product name, price and category name for products with both the category of Beverages or Condiments and a price between 15 and 30
+SELECT PRODUCTID, PRODUCTNAME, PRICE, CATEGORYNAME
+FROM PRODUCTS
+INNER JOIN CATEGORIES ON PRODUCTS.CATEGORYID = CATEGORIES.CATEGORYID
+WHERE CATEGORYNAME IN ("BEVERAGES", "CONDIMENTS") AND PRICE BETWEEN 15 AND 30
+
+6.Show the product names and supplier names for all products measured in bottles or cans (Products.Unit). Sort by supplier name. 
+FROM products
+INNER JOIN suppliers ON products.supplierid = suppliers.supplierid
+where unit like ('%bottle%') OR unit like ('%can%');
+
+7.Show the customer names, order dates, individual order item ids (OrderDetailID) and quantity for all orders from customers with a contact name beginning with G. Sort by customer name then order datae
+SELECT CUSTOMERNAME, ORDERDATES, ORDERDETAILID, QUANTITY
+FROM CUSTOMERS
+INNER JOIN ORDERS ON CUSTOMERS.CUSTOMERID = ORDERS.CUSTOMERID 
+INNER JOIN ORDERDETAILS ON ORDERS.ORDERID = ORDERDETAILS.ORDERID
+WHERE CUSTOMERNAME LIKE ("G%")
+ORDER BY (CUSTOMERNAME, ORDERDATE);
+
+8.Show the product names, quantity, price and total (quantity*price) for all OrderDetails records where the customer has customer id 2 or 4. Sort by customer name. 
+SELECT PRODUCTNAMES, QUANTITY, PRICE, QUANTITY*PRICE AS TOTAL
+FROM PRODUCTS
+INNER JOIN ORDERDETAILS ON PRODUCTS.PRODUCTID = ORDERDETAILS.PRODUCTID
+INNER JOIN ORDERS ON ORDERDETAILS.ORDERID = ORDERS.ORDERID
+INNER JOIN CUSTOMERS ON ORDERS.CUSTOMERID = CUSTOMERS.CUSTOMERID
+WHERE CUSTOMERID LIKE ("2") OR CUSTOMERID LIKE ("4")
+ORDER BY CUSTOMERNAME;
